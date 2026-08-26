@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>海のなるほど！クイズ</title>
+<style>
+:root{--ink:#15364a;--sea:#e8f8fb;--card:#fff;--accent:#12a8b4;--accent2:#ffb84d;--ok:#2e9d68;--ng:#d85b66}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color:var(--ink);background:linear-gradient(#dff7fb,#f9feff);min-height:100vh}
+.wrap{max-width:720px;margin:auto;padding:22px 16px 48px}.hero{text-align:center;padding:18px 10px}.hero h1{margin:0;font-size:clamp(28px,7vw,44px)}.hero p{margin:8px 0;color:#55717e}.bubble{display:inline-block;background:#fff;border:2px solid #bdeaf0;border-radius:999px;padding:7px 13px;font-weight:700}
+.card{background:var(--card);border-radius:24px;padding:22px;box-shadow:0 12px 35px #397e8a1c;border:1px solid #d9f0f3}.hidden{display:none!important}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.cat{border:0;border-radius:18px;padding:18px 10px;background:#f1fbfc;color:var(--ink);font-size:17px;font-weight:800;cursor:pointer}.cat:hover{transform:translateY(-1px);background:#e4f8fa}.cat span{display:block;font-size:30px;margin-bottom:5px}.cat.all{grid-column:1/-1;background:#fff5df}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.progress{height:10px;background:#e8f0f2;border-radius:99px;overflow:hidden;margin-bottom:20px}.bar{height:100%;width:0;background:var(--accent);transition:.25s}.q{font-size:22px;font-weight:900;line-height:1.5;margin:4px 0 18px}.choices{display:grid;gap:11px}.choice{width:100%;text-align:left;border:2px solid #dcebed;background:#fff;border-radius:16px;padding:15px;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer}.choice:hover{border-color:#9edce3}.choice.correct{border-color:var(--ok);background:#edf9f3}.choice.wrong{border-color:var(--ng);background:#fff0f2}.choice:disabled{cursor:default}.feedback{margin-top:17px;padding:15px;border-radius:16px;background:#f4fafb;line-height:1.65}.feedback strong{font-size:18px}.next,.primary{border:0;border-radius:999px;padding:13px 22px;background:var(--accent);color:white;font-size:16px;font-weight:900;cursor:pointer}.next{display:block;margin:17px 0 0 auto}.result{text-align:center}.score{font-size:56px;font-weight:1000;color:var(--accent);margin:8px 0}.result h2{font-size:28px}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.secondary{border:2px solid #cce8ec;background:white;color:var(--ink);border-radius:999px;padding:11px 18px;font-weight:800;cursor:pointer}.tiny{text-align:center;color:#78909a;font-size:12px;margin-top:18px}@media(max-width:480px){.card{padding:18px}.q{font-size:19px}.categories{grid-template-columns:1fr 1fr}.cat{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="bubble">🐠 1回5問</div>
+    <h1>海のなるほど！クイズ</h1>
+    <p>気になるジャンルを選んで挑戦しよう。</p>
+  </header>
+
+  <section id="start" class="card">
+    <h2>今日はどれにする？</h2>
+    <div class="categories">
+      <button class="cat" data-cat="お薬"><span>💊</span>お薬</button>
+      <button class="cat" data-cat="健康"><span>🩺</span>健康</button>
+      <button class="cat" data-cat="薬局"><span>🏪</span>薬局・相談</button>
+      <button class="cat" data-cat="在宅"><span>🏠</span>在宅医療</button>
+      <button class="cat all" data-cat="全部"><span>🌊</span>ごちゃまぜ5問</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="topline"><b id="categoryLabel"></b><b id="counter"></b></div>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <div id="question" class="q"></div>
+    <div id="choices" class="choices"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <button id="next" class="next hidden">次の問題へ →</button>
+  </section>
+
+  <section id="result" class="card result hidden">
+    <div style="font-size:50px">🏆</div>
+    <h2>結果発表！</h2>
+    <div id="score" class="score"></div>
+    <p id="message"></p>
+    <div class="actions">
+      <button id="retry" class="primary">もう一回！</button>
+      <button id="home" class="secondary">ジャンルを選び直す</button>
+    </div>
+  </section>
+  <div class="tiny">試作品 Ver.0.1 ｜ 問題・キャラクター・薬局名は自由に差し替え可能</div>
+</div>
+<script>
+const questions=[
+ {cat:'お薬',q:'薬を飲み忘れたことに気づいたとき、基本的に避けたい行動はどれ？',c:['自己判断で2回分をまとめて飲む','薬の説明書を確認する','薬剤師に相談する','次に飲む時間との間隔を確認する'],a:0,e:'薬によって対応は異なります。自己判断で2回分をまとめて飲むと、作用や副作用が強く出ることがあります。'},
+ {cat:'お薬',q:'処方された薬について「いつまで飲むの？」と疑問があるとき、相談先として適切なのは？',c:['薬剤師や処方した医療機関','とりあえずSNSだけで決める','家族の薬と交換する','自分の判断だけで中止する'],a:0,e:'薬の目的や服用期間は薬ごと・患者さんごとに異なります。薬剤師や処方した医療機関へ確認しましょう。'},
+ {cat:'健康',q:'家庭で血圧を測るとき、測定直前の行動として避けた方がよいものは？',c:['少し座って安静にする','測定直前に激しく運動する','同じような条件で測る','記録を残す'],a:1,e:'運動直後などは血圧が普段と異なることがあります。落ち着いた状態で測ると日々の比較がしやすくなります。'},
+ {cat:'健康',q:'保湿剤を使う目的として最も近いものは？',c:['皮膚のバリア機能を保つのを助ける','必ず体温を下げる','血圧を直接下げる','すべてのかゆみを一度で治す'],a:0,e:'保湿は皮膚の水分を保ったり、水分が逃げにくくしたりして、皮膚のバリア機能を支えます。'},
+ {cat:'薬局',q:'薬局で薬剤師に相談してよい内容はどれ？',c:['薬の飲み方だけ','副作用だけ','飲み忘れだけ','薬の飲み方・副作用・飲み忘れなど'],a:3,e:'薬局では服用方法、副作用、飲み忘れ、飲み合わせなど、薬に関するさまざまな相談ができます。'},
+ {cat:'薬局',q:'市販薬と処方薬を一緒に使いたいとき、確認するとよいことは？',c:['飲み合わせ','パッケージの色だけ','値段だけ','錠剤の形だけ'],a:0,e:'同じような成分が重なったり、組み合わせに注意が必要だったりする場合があります。使用中の薬を薬剤師に伝えると確認できます。'},
+ {cat:'在宅',q:'在宅医療で薬剤師が行う支援として考えられるものは？',c:['薬の管理や服薬状況の確認','家のリフォーム工事','テレビの修理','電気料金の契約変更'],a:0,e:'在宅では、薬の管理、服薬状況、副作用や残薬などを確認し、必要に応じて医師などと情報共有します。'},
+ {cat:'在宅',q:'家に飲み残しの薬が増えてきた場合、まず相談できる相手は？',c:['薬剤師','誰にも言わず全部捨てる','他の人に渡す','全部まとめて飲む'],a:0,e:'残薬には飲み忘れや飲みにくさなどの理由が隠れていることがあります。薬剤師に相談すると整理や服薬方法の検討につながります。'}
+];
+let selected=[],idx=0,score=0,currentCat='全部';
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function start(cat){currentCat=cat;let pool=cat==='全部'?questions:questions.filter(x=>x.cat===cat);selected=shuffle(pool).slice(0,Math.min(5,pool.length));idx=0;score=0;$('start').classList.add('hidden');$('result').classList.add('hidden');$('quiz').classList.remove('hidden');render()}
+function render(){let x=selected[idx];$('categoryLabel').textContent='🌊 '+(currentCat==='全部'?'ごちゃまぜ':currentCat);$('counter').textContent=`${idx+1} / ${selected.length}`;$('bar').style.width=`${(idx/selected.length)*100}%`;$('question').textContent=x.q;$('feedback').classList.add('hidden');$('next').classList.add('hidden');$('choices').innerHTML='';x.c.forEach((t,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=t;b.onclick=()=>answer(i,b);$('choices').appendChild(b)})}
+function answer(i,b){let x=selected[idx];document.querySelectorAll('.choice').forEach((el,j)=>{el.disabled=true;if(j===x.a)el.classList.add('correct')});if(i===x.a){score++;$('feedback').innerHTML='<strong>⭕ 正解！</strong><br>'+x.e}else{b.classList.add('wrong');$('feedback').innerHTML='<strong>🐟 惜しい！</strong><br>'+x.e}$('feedback').classList.remove('hidden');$('next').classList.remove('hidden');$('bar').style.width=`${((idx+1)/selected.length)*100}%`}
+$('next').onclick=()=>{idx++;if(idx<selected.length)render();else finish()};
+function finish(){$('quiz').classList.add('hidden');$('result').classList.remove('hidden');$('score').textContent=`${score} / ${selected.length}`;let r=score/selected.length;$('message').textContent=r===1?'全問正解！海のクイズ王だ！':r>=.8?'あと一歩で全問正解！':r>=.6?'いい調子！解説も読んで知識を育てよう。':'ここから伸びる！もう一度挑戦してみよう。'}
+document.querySelectorAll('.cat').forEach(b=>b.onclick=()=>start(b.dataset.cat));$('retry').onclick=()=>start(currentCat);$('home').onclick=()=>{$('result').classList.add('hidden');$('start').classList.remove('hidden')};
+</script>
+</body>
+</html>
