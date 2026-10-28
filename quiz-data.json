@@ -103,7 +103,7 @@
                 "テレパシー感知",
                 "エコーロケーション",
                 "赤外線サーモグラフィー視覚",
-                "カウンターシェーティング"
+                "カウンターシェーディング"
               ],
               "answer": 1,
               "explanation": "イルカは「カチカチ」という音（超音波）を出し、それがまわりの物にぶつかって返ってくる「エコー（反響）」を聞き取ることで、まわりの状況を立体的に把握しているんだよ。",
@@ -315,10 +315,11 @@
   ],
   "defaultCorrectImage": "asset_z2knbula",
   "defaultIncorrectImage": "asset_gzsp1uf7",
-  "quizUrl": "https://marine-pharmacy0963.github.io/MARINE-TRICK/",
+  "quizUrl": "https://marine-pharmacy0963.github.io/MARINE-TRICK-QUIZ/",
   "lineUrl": "https://lin.ee/xVXGvuh",
   "homeUrl": "https://www.e-classa.net/marine/information.html",
   "printOrder": "13574286",
+  "portalUrl": "https://marine-pharmacy0963.github.io/MARINE-TRICK/",
   "assets": {
     "asset_2j44znpj": "assets/asset_2j44znpj.webp",
     "asset_jsyjb21f": "assets/asset_jsyjb21f.webp",
