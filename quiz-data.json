@@ -18,11 +18,15 @@
           "id": "course_61r9ddi2",
           "type": "ecology",
           "title": "生態クイズ",
-          "intro": "私はモチーフはイルカなの♪みんなはイルカのことをどのくらい知っているかな？",
+          "intro": "私のモチーフはイルカなの♪みんなはイルカのことをどのくらい知っているかな？",
           "scene": "ファマリンと一緒に、イルカのひみつを探ろう！",
           "selectImage": "asset_gmlalg1w",
           "pointImages": [
-            "asset_ebjnf3i1"
+            "asset_ebjnf3i1",
+            "asset_4t64nb5e",
+            "asset_zaz99yw9",
+            "asset_97e1h4or",
+            "asset_iz59jw12"
           ],
           "endImages": [
             "asset_liddwuxu",
@@ -166,11 +170,15 @@
           "id": "course_zfso4v69",
           "type": "ecology",
           "title": "生態クイズ",
-          "intro": "アゴーンからの挑戦状：砂からのぞく海の住人",
-          "scene": "アゴーン（チンアナゴ）と一緒に、砂の中の暮らしを探ってみよう！",
+          "intro": "アゴーン（チンアナゴ）と一緒に、砂の中の暮らしを探ってみよう！",
+          "scene": "砂からのぞく海の住人",
           "selectImage": "asset_imikdrkx",
           "pointImages": [
-            "asset_x4m3eq1h"
+            "asset_x4m3eq1h",
+            "asset_5fb96hnh",
+            "asset_34b4xmi7",
+            "asset_hl66qz0r",
+            "asset_k6mas29s"
           ],
           "endImages": [
             "asset_pza9j5d9",
@@ -307,6 +315,10 @@
   ],
   "defaultCorrectImage": "asset_z2knbula",
   "defaultIncorrectImage": "asset_gzsp1uf7",
+  "quizUrl": "https://marine-pharmacy0963.github.io/MARINE-TRICK/",
+  "lineUrl": "https://lin.ee/xVXGvuh",
+  "homeUrl": "https://www.e-classa.net/marine/information.html",
+  "printOrder": "13574286",
   "assets": {
     "asset_2j44znpj": "assets/asset_2j44znpj.webp",
     "asset_jsyjb21f": "assets/asset_jsyjb21f.webp",
@@ -315,6 +327,10 @@
     "asset_gz5opc1i": "assets/asset_gz5opc1i.webp",
     "asset_gmlalg1w": "assets/asset_gmlalg1w.webp",
     "asset_ebjnf3i1": "assets/asset_ebjnf3i1.webp",
+    "asset_4t64nb5e": "assets/asset_4t64nb5e.webp",
+    "asset_zaz99yw9": "assets/asset_zaz99yw9.webp",
+    "asset_97e1h4or": "assets/asset_97e1h4or.webp",
+    "asset_iz59jw12": "assets/asset_iz59jw12.webp",
     "asset_liddwuxu": "assets/asset_liddwuxu.webp",
     "asset_h77q5ehv": "assets/asset_h77q5ehv.webp",
     "asset_tl9112x7": "assets/asset_tl9112x7.webp",
@@ -323,6 +339,10 @@
     "asset_vk2ql4qy": "assets/asset_vk2ql4qy.webp",
     "asset_rcfiyigr": "assets/asset_rcfiyigr.webp",
     "asset_x4m3eq1h": "assets/asset_x4m3eq1h.webp",
+    "asset_5fb96hnh": "assets/asset_5fb96hnh.webp",
+    "asset_34b4xmi7": "assets/asset_34b4xmi7.webp",
+    "asset_hl66qz0r": "assets/asset_hl66qz0r.webp",
+    "asset_k6mas29s": "assets/asset_k6mas29s.webp",
     "asset_pza9j5d9": "assets/asset_pza9j5d9.webp",
     "asset_guak3ujj": "assets/asset_guak3ujj.webp",
     "asset_rb2lob7z": "assets/asset_rb2lob7z.webp"
